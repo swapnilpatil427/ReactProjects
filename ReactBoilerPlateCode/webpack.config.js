@@ -6,18 +6,14 @@ module.exports = {
     },
     resolve: {
         root: __dirname,
-        alias: {
-            Greeter: 'public/components/Greeter.jsx',
-            GreeterMessage: 'public/components/GreeterMessage.jsx',
-            GreeterForm: 'public/components/GreeterForm.jsx'
-        },
+        alias: {},
         extensions: ['', '.js', '.jsx']
     },
     module: { // Webpack does not understand JSX files so we need loaders
         loaders: [{
             loader: 'babel-loader',
             query: {
-                presets: ['react', 'es2015']
+                presets: ['react', 'es2015', 'stage-0']
             },
             test: /\.jsx?$/,
             // Excludes node_modules and bower folder
