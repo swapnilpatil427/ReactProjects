@@ -23,10 +23,18 @@ var Weather = React.createClass({
             });
 
     },
-    componentWillReceiveProps : function (newProps) {
-         var location = newProps.location.query.location;
+    componentDidMount: function () {
+        var location = this.props.location.query.location;
 
-        if(location && location.length > 0) {
+        if (location && location.length > 0) {
+            this.handleSearch(location);
+            window.location.hash = '#/';
+        }
+    },
+    componentWillReceiveProps: function (newProps) {
+        var location = newProps.location.query.location;
+
+        if (location && location.length > 0) {
             this.handleSearch(location);
             window.location.hash = '#/';
         }
