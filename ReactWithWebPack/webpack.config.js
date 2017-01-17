@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './public/app.jsx', // tell webpack where to start
+    entry: './app/app.jsx', // tell webpack where to start
     output: {
         path: __dirname,
         filename: './public/bundle.js'

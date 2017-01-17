@@ -1,18 +1,43 @@
 var React = require('react');
 var {Link, IndexLink} = require('react-router');
-var Nav = (props) => {
-    return (
-        <div>
-            <h3>
-                Nav Component</h3>
-            <IndexLink to="/" activeClassName="active">
-                Get Weather</IndexLink>
-            <Link to="/about" activeClassName="active">
-                About</Link>
-            <Link to="/examples" activeClassName="active">
-                Examples</Link>
-        </div>
-    );
-};
-
+var Nav = React.createClass({
+    onSearch: function (e) {
+        e.preventDefault();
+    },
+    render: function () {
+        return (
+            <div className="top-bar">
+                <div className="top-bar-left">
+                    <ul className="menu" data-dropdown-menu>
+                        <li className="menu-text">React Weather App</li>
+                        <li>
+                            <IndexLink to="/" activeClassName="active">
+                                Get Weather</IndexLink>
+                        </li>
+                        <li>
+                            <Link to="/about" activeClassName="active">
+                                About</Link>
+                        </li>
+                        <li>
+                            <Link to="/examples" activeClassName="active">
+                                Examples</Link>
+                        </li>
+                    </ul>
+                </div>
+                <div className="top-bar-right">
+                    <form onSubmit={this.onSearch}>
+                        <ul className="menu">
+                            <li>
+                                <input type="search" placeholder="Search weather by City"/>
+                            </li>
+                            <li>
+                                <button type="button" className="button">Get Weather</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+});
 module.exports = Nav;
