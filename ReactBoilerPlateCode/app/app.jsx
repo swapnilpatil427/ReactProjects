@@ -1,5 +1,15 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var {Route, Router, IndexRoute, hashHistory} = require ('react-router');
+var Main = require('Main');
+
+require('foundation-sites/dist/foundation.min.css');
+require('applicationStyles');
+$(document).foundation();
+
 ReactDOM.render(
-    <h1> React Boiler Plate App </h1>, document.getElementById('app'));
+    <Router history={hashHistory}>
+        <Route path="/" component={Main}>
+          
+        </Route>
+    </Router>, document.getElementById('app'));
