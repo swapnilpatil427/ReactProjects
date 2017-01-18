@@ -25,7 +25,7 @@ describe('CountDown Component', () => {
             }, 1001);
         });
 
-        it('should never set count less than zero', () => {
+        it('should never set count less than zero', (done) => {
             var countdown = TestUtils.renderIntoDocument(<CountDown />);
             countdown.handleSetCountDown(1);
             setTimeout(() => {
@@ -33,6 +33,19 @@ describe('CountDown Component', () => {
                 done();
             }, 3001);
         });
+
+        it('should pause countdown on paused status', (done) => {
+            var countdown = TestUtils.renderIntoDocument(<CountDown/>);
+            countdown.handleSetCountDown(3);
+            countdown.handleStatusChanged('paused');
+
+             setTimeout(() => {
+                expect(countdown.state.count).toBe(3);
+                expect(countdown.state.countdownStatus).toBe('paused');
+                done();
+            }, 2001);
+        });
+
     });
     
 });
