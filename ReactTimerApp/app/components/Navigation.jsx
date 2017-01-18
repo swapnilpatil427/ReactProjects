@@ -15,6 +15,10 @@ var Navigation = () => {
                         <Link to="/countdown" activeClassName="active-link">
                             Count Down</Link>
                     </li>
+
+                     <li>
+                        <a href="https://github.com/swapnilpatil427/ReactProjects" target="_blank"> Github </a>
+                    </li>
                 </ul>
             </div>
             <div className="top-bar-right">
