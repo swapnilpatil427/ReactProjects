@@ -10,6 +10,4 @@ describe('Navigation Component', () => {
     it('Should Exists', () => {
         expect(Navigation).toExist();
     });
-
-  
 });
