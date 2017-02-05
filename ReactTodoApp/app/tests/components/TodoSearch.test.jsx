@@ -1,31 +1,41 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
 var $ = require('jQuery');
-var TestUtils = require('react-addons-test-utils');
-var TodoSearch = require('TodoSearch');
 
-describe('TodoSearch Component', () => {
-    it('Should Exists', () => {
-        expect(TodoSearch).toExist();
-    });
+import {TodoSearch} from 'TodoSearch';
 
-    it('it should call onSearch on with entered input text', () => {
-        var SearchText = 'Dog';
-        var spy = expect.createSpy();
-        var todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy} />);
-        todoSearch.refs.searchText.value = SearchText;
-        TestUtils.Simulate.change(todoSearch.refs.searchText);
-        expect(spy).toHaveBeenCalledWith(false, SearchText);
-    });
+describe('TodoSearch', () => {
+  it('should exist', () => {
+    expect(TodoSearch).toExist();
+  });
 
-    it('it should call onSearch on with proper checkbox change value', () => {
-        var SearchText = 'Dog';
-        var spy = expect.createSpy();
-        var todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy} />);
-        todoSearch.refs.showCompleted.checked = true;
-        TestUtils.Simulate.change(todoSearch.refs.showCompleted);
-        expect(spy).toHaveBeenCalledWith(true, '');
-    }); 
+  it('should dispatch SET_SEARCH_TEXT on input change', () => {
+    var searchText = 'Dog';
+    var action = {
+      type: 'SET_SEARCH_TEXT',
+      searchText
+    };
+    var spy = expect.createSpy();
+    var todoSearch = TestUtils.renderIntoDocument(<TodoSearch dispatch={spy}/>);
 
+    todoSearch.refs.searchText.value = searchText;
+    TestUtils.Simulate.change(todoSearch.refs.searchText);
+
+    expect(spy).toHaveBeenCalledWith(action);
+  });
+
+  it('should dispatch TOGGLE_SHOW_COMPLETED when checkbox checked', () => {
+    var action = {
+      type: 'TOGGLE_SHOW_COMPLETED'
+    };
+    var spy = expect.createSpy();
+    var todoSearch = TestUtils.renderIntoDocument(<TodoSearch dispatch={spy}/>);
+
+    todoSearch.refs.showCompleted.checked = true;
+    TestUtils.Simulate.change(todoSearch.refs.showCompleted);
+
+    expect(spy).toHaveBeenCalledWith(action);
+  });
 });

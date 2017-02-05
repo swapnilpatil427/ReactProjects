@@ -1,30 +1,34 @@
-var  React = require('react');
-var Todo = require('Todo');
-var TodoList = React.createClass({
-    render : function () {
-        var {todos} = this.props;
-
-        var rendertodos = () => {
-            if(todos.length === 0) {
-                return (
-                    <div>
-                        <p className="container__messsage"> Nothign to do </p>
-                    </div>
-                );
-            } else {
-            return todos.map((todo) => {
-                return (
-                    <Todo onToggle = {this.props.onToggle} key={todo.id} {...todo}/> // Spread operator. it spreads all the properties. so component will receive all the properties as separate pros
-                )
-            });
-            }
-        };
+var React = require('react');
+var {connect} = require('react-redux');
+import Todo from 'Todo';
+import TodoAPI from 'TodoAPI';
+export var TodoList = React.createClass({
+  render: function () {
+    var {todos, showCompleted, searchText} = this.props;
+    var renderTodos = () => {
+      if (todos.length === 0) {
         return (
-            <div>
-                {rendertodos()}
-            </div>
+          <p className="container__message">Nothing To Do</p>
         );
-    }
+      }
+
+      return TodoAPI.filterTodos(todos,showCompleted,searchText).map((todo) => {
+        return (
+          <Todo key={todo.id} {...todo}/>
+        );
+      });
+    };
+
+    return (
+      <div>
+        {renderTodos()}
+      </div>
+    )
+  }
 });
 
-module.exports = TodoList;
+export default connect(
+  (state) => {
+    return state;
+  }
+)(TodoList);
