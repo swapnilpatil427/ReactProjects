@@ -4,7 +4,7 @@ var expect = require('expect');
 var $ = require('jQuery');
 var TestUtils = require('react-addons-test-utils');
 import ConnectedAddTodo, {AddTodo} from 'AddTodo';
-
+import *  as actions from 'actions';
 describe('Add Todo Component', () => {
     it('Should Exists', () => {
         expect(AddTodo).toExist();
@@ -12,11 +12,8 @@ describe('Add Todo Component', () => {
 
     it('it should dispatch ADD_TODO on valid data', () => {
         var TodoText = 'Check Mail';
+        var action = actions.startAddTodo(TodoText);
         var spy = expect.createSpy();
-        var action = {
-            type : 'ADD_TODO',
-            text : TodoText
-        }
         var addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />);
 
         var $el = $(ReactDOM.findDOMNode(addTodo));
